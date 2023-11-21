@@ -1,6 +1,8 @@
 def main():
     """Main"""
-    get_password(10)
+    password_length = 10
+    password = get_password(password_length)
+    print_stars(password)
 
 
 def get_password(min_password_length):
@@ -8,8 +10,12 @@ def get_password(min_password_length):
     password = input('Please enter your password: ')
     while len(password) < min_password_length:
         password = input('Please try again: ')
+    return password
 
-    for i in range(0, len(password), 1):
+
+def print_stars(input_password):
+    """Print stars according to length of input password"""
+    for i in range(0, len(input_password), 1):
         print("*", end='')
 
 

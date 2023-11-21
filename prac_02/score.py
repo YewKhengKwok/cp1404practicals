@@ -14,17 +14,19 @@ def main():
     while score < min_score_limit or score > max_score_limit:
         print("Invalid score");
         score = float(input("Enter score: "))
-    output = get_result(score)
-    print(output)
+    print(get_result(score))
 
     print(f'Your random score is:', get_random_score(min_score_limit, max_score_limit))
 
 
 def get_result(score):
     """Determine result from score"""
-    if score >= 90:
+    excellent_score = 90
+    pass_score = 50
+
+    if score >= excellent_score:
         result = 'Excellent'
-    elif score >= 50:
+    elif score >= pass_score:
         result = 'Pass'
     else:
         result = 'Bad'

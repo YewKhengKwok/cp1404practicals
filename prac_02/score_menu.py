@@ -1,6 +1,6 @@
 def main():
     """Main function with menu option"""
-    menu = '(G)et a valid score' + '\n' + '(P)rint result' + '\n' + '(S)how stars' + '\n' + '(Q)uit'
+    menu = '(G)et a valid score \n(P)rint result \n(S)how stars \n(Q)uit'
 
     score_val = get_valid_score()
 
@@ -15,9 +15,7 @@ def main():
             print(get_result(score_val))
 
         elif menu_choice == 'S':
-            for i in range(0, int(score_val), 1):
-                print("*", end='')
-            print()
+            print_stars(score_val)
 
         else:
             print("Invalid option")
@@ -40,13 +38,23 @@ def get_valid_score():
 
 def get_result(score):
     """Determine result from score"""
-    if score >= 90:
+    excellent_score = 90
+    pass_score = 50
+
+    if score >= excellent_score:
         result = 'Excellent'
-    elif score >= 50:
+    elif score >= pass_score:
         result = 'Pass'
     else:
         result = 'Bad'
     return result
+
+
+def print_stars(num_stars):
+    """Print stars according to number pass to function"""
+    for i in range(0, num_stars, 1):
+        print("*", end='')
+    print()
 
 
 main()
