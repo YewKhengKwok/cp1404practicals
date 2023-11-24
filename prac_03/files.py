@@ -14,14 +14,6 @@ print(f"Your name is {in_file.readline()}")
 in_file.close()
 
 """Q3"""
-out_file = open('numbers.txt', 'w')
-
-print(17, file=out_file)
-print(42, file=out_file)
-print(400, file=out_file)
-
-out_file.close()
-
 in_file = open('numbers.txt', 'r')
 
 number1 = int(in_file.readline())

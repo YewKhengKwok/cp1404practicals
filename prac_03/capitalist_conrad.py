@@ -19,7 +19,7 @@ numbers_of_days = 1
 out_file = open('cap_conrad.txt', 'w')
 
 price = INITIAL_PRICE
-print(f"${price:,.2f}", file=out_file)
+print(f"Starting price: ${price:,.2f}", file=out_file)
 
 while MIN_PRICE <= price <= MAX_PRICE:
     price_change = 0
