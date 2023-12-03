@@ -7,13 +7,14 @@ FILENAME = "subject_data.txt"
 
 
 def main():
+    """Formats the input data and prints in the specified format"""
     data = get_data()
     print(data)
     print_subjects(data)
 
 
 def get_data():
-    """Read data from file formatted like: subject,lecturer,number of students."""
+    """Read data from file formatted like: subject, lecturer, number of students."""
     input_file = open(FILENAME)
     subjects = []
 
