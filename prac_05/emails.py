@@ -1,5 +1,7 @@
 """
 Emails
+Determine the user's name from email user entered
+If name not correct, prompt for correct name
 """
 
 email_to_names = {}
