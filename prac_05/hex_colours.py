@@ -1,6 +1,7 @@
 """
 CP1404/CP5632 Practical
 Hex colour in a dictionary
+Colour name will show their respective hex code
 """
 
 COLOUR_TO_HEX = {"BLACK": "#000000", "AQUA": "##00ffff", "BEIGE": "#f5f5dc",
