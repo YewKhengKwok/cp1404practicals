@@ -21,5 +21,5 @@ class ProgrammingLanguage:
             return False
 
     def __str__(self):
-        """String method"""
+        """String return method"""
         return f"{self.language_name}, {self.typing_type} Typing, Reflection={self.is_dynamic()}, First appeared in {self.created_year}"
