@@ -12,15 +12,16 @@ from project import Project
 MENU = ("(L)oad projects \n" "(S)ave projects \n" "(D)isplay projects \n"
         "(F)ilter projects by date \n" "(A)dd new project \n" "(U)pdate project \n"
         "(Q)uit")
-
 projects_added = []
+in_file = ''
 
 print(MENU)
 choice = input("> ").upper()
 
 while choice != "Q":
     if choice == "L":
-        # Load Projects
+        # Load Projects from file, clear list on each load
+        projects_added = []
         # Error check if invalid file
         is_valid_file = False
         while not is_valid_file:
@@ -54,7 +55,22 @@ while choice != "Q":
         print(f"")
 
     elif choice == "S":
-        # Save Projects
+        # Save Projects to file
+        # Ask user for save file name
+        # TESTING
+        filename_to_save = 'test.txt'
+        # filename_to_save = input("Save as?: ")
+        out_file = open(filename_to_save, 'w')
+        # Header
+        print(f"Name	Start Date	Priority	Cost Estimate	Completion Percentage", file=out_file)
+        # Contents
+        for project in projects_added:
+            print(f"{project.name}	{project.start_date}	{project.priority}	"
+                  f"{project.cost_estimate:.1f}	{project.completion_percentage}", file=out_file)
+
+        # Close file after writing
+        out_file.close()
+        print(f"Saved successfully to {filename_to_save}")
         print(f"")
 
     elif choice == "D":
