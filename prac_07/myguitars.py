@@ -18,7 +18,7 @@ def main():
         parts = line.strip().split(',')
         # create class objects with parts stripped
         guitar = Guitar(parts[0], parts[1], parts[2])
-        # Add the language we've just constructed to the list
+        # Add the guitar we've just constructed to the list
         guitars_added.append(guitar)
 
     # Close the file as soon as we've finished reading it
