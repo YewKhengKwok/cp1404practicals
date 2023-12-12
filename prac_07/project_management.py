@@ -42,9 +42,9 @@ while choice != "Q":
             # Strip newline from end and split it into parts (CSV)
             parts = line.strip().split('	')
             # create class objects with parts stripped
-            project = Project(parts[0], parts[1], parts[2], parts[3], parts[4])
+            add_project = Project(parts[0], parts[1], parts[2], parts[3], parts[4])
             # Add the project we've just constructed to the list
-            projects_added.append(Project)
+            projects_added.append(add_project)
 
         # Close file after reading
         in_file.close()
@@ -58,7 +58,21 @@ while choice != "Q":
         print(f"")
 
     elif choice == "D":
+        # Sort by priority (highest to lowest)
+        projects_added.sort(key=lambda x: x.priority)
         # Display Projects
+        print(f"Incomplete projects:")
+        for project in projects_added:
+            if not project.is_completed():
+                print(f"{project.name}, start: {project.start_date}, priority {project.priority}, "
+                      f"estimate: ${project.cost_estimate:.2f}, completion: {project.completion_percentage}%")
+
+        print(f"Completed projects:")
+        for project in projects_added:
+            if project.is_completed():
+                print(f"{project.name}, start: {project.start_date}, priority {project.priority}, "
+                      f"estimate: ${project.cost_estimate:.2f}, completion: {project.completion_percentage}%")
+
         print(f"")
 
     elif choice == "F":
