@@ -96,7 +96,19 @@ while choice != "Q":
         print(f"")
 
     elif choice == "A":
-        # Add new Projects
+        # Add new Project
+        print(f"Let's add a new project")
+        name = input("Name: ")
+        start_date = input("Start date (dd/mm/yy): ")
+        priority = input("Priority: ")
+        cost_estimate = input("Cost estimate: $")
+        percent_completed = input("Percent Completed: ")
+
+        # create class objects with user input details
+        add_project = Project(name, start_date, priority, cost_estimate, percent_completed)
+        # Add the project we've just constructed to the list
+        projects_added.append(add_project)
+
         print(f"")
 
     elif choice == "U":
