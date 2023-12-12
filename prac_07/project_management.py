@@ -1,6 +1,7 @@
-"""Project Management"""
+"""Project Management software
+    user can..."""
 
-import datetime
+# import datetime
 
 from project import Project
 
@@ -61,9 +62,9 @@ while choice != "Q":
         filename_to_save = 'test.txt'
         # filename_to_save = input("Save as?: ")
         out_file = open(filename_to_save, 'w')
-        # Header
+        # Write Header line
         print(f"Name	Start Date	Priority	Cost Estimate	Completion Percentage", file=out_file)
-        # Contents
+        # Write Contents of each project line by line
         for project in projects_added:
             print(f"{project.name}	{project.start_date}	{project.priority}	"
                   f"{project.cost_estimate:.1f}	{project.completion_percentage}", file=out_file)
@@ -78,17 +79,13 @@ while choice != "Q":
         projects_added.sort(key=lambda x: x.priority)
         # Display Projects
         print(f"Incomplete projects:")
-        for project in projects_added:
-            if not project.is_completed():
-                print(f"{project.name}, start: {project.start_date}, priority {project.priority}, "
-                      f"estimate: ${project.cost_estimate:.2f}, completion: {project.completion_percentage}%")
+        for i, project in enumerate(projects_added, 0):
+            print(f"{projects_added[i]}")
 
         print(f"Completed projects:")
-        for project in projects_added:
+        for i, project in enumerate(projects_added, 0):
             if project.is_completed():
-                print(f"{project.name}, start: {project.start_date}, priority {project.priority}, "
-                      f"estimate: ${project.cost_estimate:.2f}, completion: {project.completion_percentage}%")
-
+                print(f"{projects_added[i]}")
         print(f"")
 
     elif choice == "F":
@@ -113,6 +110,45 @@ while choice != "Q":
 
     elif choice == "U":
         # Update Projects
+        total_choice = 0
+        user_choice = 0
+        for i, project in enumerate(projects_added, 0):
+            print(f"{i} {projects_added[i]}")
+            total_choice += 1
+
+        # Ask user to choose project
+        # Check if projects loaded
+        if total_choice == 0:
+            print("No projects loaded")
+            is_valid_choice = True
+        else:
+            is_valid_choice = False
+        # Validation check if project exists
+        while not is_valid_choice:
+            try:
+                user_choice = int(input("Project choice: "))
+                if (user_choice < 0) or (user_choice > total_choice-1):
+                    print("Invalid option, try again: ")
+                else:
+                    is_valid_choice = True
+                    print(f"{projects_added[user_choice]}")
+
+                    # New percentage value, blank is same value
+                    new_percentage = input("New Percentage: ")
+                    if new_percentage != "":
+                        projects_added[user_choice].update_percentage(new_percentage)
+
+                    # New priority value, blank if same value
+                    new_priority = input("New Priority: ")
+                    if new_priority != "":
+                        projects_added[user_choice].update_priority(new_priority)
+
+                    # TESTING
+                    print(f"{projects_added[user_choice]}")
+
+            except ValueError:
+                print("Not a number, try again: ")
+
         print(f"")
 
     else:
