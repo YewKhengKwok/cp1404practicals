@@ -1,15 +1,17 @@
 """
 class Project file
 """
+import datetime
 
 
 class Project:
 
     def __init__(self, name="", start_date="", priority=0,
                  cost_estimate=0, completion_percentage=0):
-        """Project class constructor"""
+        """Project class constructor
+            start_date uses datetime module"""
         self.name = name
-        self.start_date = start_date
+        self.start_date = datetime.datetime.strptime(start_date, "%d/%m/%Y").date()
         self.priority = int(priority)
         self.cost_estimate = float(cost_estimate)
         self.completion_percentage = int(completion_percentage)
@@ -20,7 +22,7 @@ class Project:
 
     def __str__(self):
         """String return method"""
-        return (f"{self.name}, start: {self.start_date}, priority {self.priority}, "
+        return (f"{self.name}, start: {self.start_date.strftime('%d/%m/%Y')}, priority {self.priority}, "
                 f"estimate: ${self.cost_estimate:.2f}, completion: {self.completion_percentage}%")
 
     def is_completed(self):

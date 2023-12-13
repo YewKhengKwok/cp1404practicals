@@ -1,14 +1,9 @@
 """Project Management software
     user can..."""
 
-# import datetime
+import datetime
 
 from project import Project
-
-# date_string = input("Date (d/m/yyyy): ")  # e.g., "30/9/2022"
-# date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
-# print(f"That day is/was {date.strftime('%A')}")
-# print(date.strftime("%d/%m/%Y"))
 
 MENU = ("(L)oad projects \n" "(S)ave projects \n" "(D)isplay projects \n"
         "(F)ilter projects by date \n" "(A)dd new project \n" "(U)pdate project \n"
@@ -16,9 +11,9 @@ MENU = ("(L)oad projects \n" "(S)ave projects \n" "(D)isplay projects \n"
 projects_added = []
 in_file = ''
 
+# MENU system, Q for quit
 print(MENU)
 choice = input("> ").upper()
-
 while choice != "Q":
     if choice == "L":
         # Load Projects from file, clear list on each load
@@ -31,19 +26,19 @@ while choice != "Q":
             # filename_to_load = input("What is the filename?: ")
             try:
                 in_file = open(filename_to_load, 'r')
-            except FileNotFoundError:
-                print("Invalid filename")
-            finally:
                 print(f"{filename_to_load} successfully loaded!")
                 is_valid_file = True
+            except FileNotFoundError:
+                print("Invalid filename")
 
         # Read file
         # 'Consume' the first line (header) - we don't need its contents
         in_file.readline()
         for line in in_file:
-            # Strip newline from end and split it into parts (CSV)
+            # Strip newline from end and split it into parts
             parts = line.strip().split('	')
             # create class objects with parts stripped
+            # name, start_date, priority, cost_estimate, completion_percentage
             add_project = Project(parts[0], parts[1], parts[2], parts[3], parts[4])
             # Add the project we've just constructed to the list
             projects_added.append(add_project)
@@ -60,13 +55,13 @@ while choice != "Q":
         # Ask user for save file name
         # TESTING
         filename_to_save = 'test.txt'
-        # filename_to_save = input("Save as?: ")
+        # filename_to_save = input("Save as? (eg text.txt): ")
         out_file = open(filename_to_save, 'w')
         # Write Header line
         print(f"Name	Start Date	Priority	Cost Estimate	Completion Percentage", file=out_file)
         # Write Contents of each project line by line
         for project in projects_added:
-            print(f"{project.name}	{project.start_date}	{project.priority}	"
+            print(f"{project.name}	{project.start_date.strftime('%d/%m/%Y')}	{project.priority}	"
                   f"{project.cost_estimate:.1f}	{project.completion_percentage}", file=out_file)
 
         # Close file after writing
@@ -75,12 +70,13 @@ while choice != "Q":
         print(f"")
 
     elif choice == "D":
-        # Sort by priority (highest to lowest)
+        # Sort the projects by priority (highest to lowest)
         projects_added.sort(key=lambda x: x.priority)
         # Display Projects
         print(f"Incomplete projects:")
         for i, project in enumerate(projects_added, 0):
-            print(f"{projects_added[i]}")
+            if not project.is_completed():
+                print(f"{projects_added[i]}")
 
         print(f"Completed projects:")
         for i, project in enumerate(projects_added, 0):
@@ -90,6 +86,17 @@ while choice != "Q":
 
     elif choice == "F":
         # Filter Projects by date
+        # User input date to check
+        date_string_input = input("Show projects that start after date (dd/mm/yy): ")
+        # Convert string to date format
+        date_to_check = datetime.datetime.strptime(date_string_input, "%d/%m/%Y").date()
+        # Sort the projects by date
+        projects_added.sort(key=lambda x: x.start_date)
+        # Display projects that starts after the user date
+        for i, project in enumerate(projects_added, 0):
+            if project.start_date >= date_to_check:
+                print(f"{projects_added[i]}")
+
         print(f"")
 
     elif choice == "A":
@@ -127,13 +134,13 @@ while choice != "Q":
         while not is_valid_choice:
             try:
                 user_choice = int(input("Project choice: "))
-                if (user_choice < 0) or (user_choice > total_choice-1):
+                if (user_choice < 0) or (user_choice > total_choice - 1):
                     print("Invalid option, try again: ")
                 else:
                     is_valid_choice = True
                     print(f"{projects_added[user_choice]}")
 
-                    # New percentage value, blank is same value
+                    # New percentage value, blank if same value
                     new_percentage = input("New Percentage: ")
                     if new_percentage != "":
                         projects_added[user_choice].update_percentage(new_percentage)
@@ -152,7 +159,7 @@ while choice != "Q":
         print(f"")
 
     else:
-        # Invalid input
+        # Invalid input for MENU
         print(f"Invalid input")
 
     print(MENU)
