@@ -11,7 +11,7 @@ MENU = ("(L)oad projects \n" "(S)ave projects \n" "(D)isplay projects \n"
 
 
 def main():
-    """Main function, handles MENU system"""
+    """Main function, handles MENU system and calls respective function"""
     projects_added = []
 
     # MENU system, Q for quit
@@ -46,9 +46,11 @@ def main():
             # Invalid input for MENU
             print(f"Invalid input")
 
+        # Print MENU and ask for user input after selected function before has completed
         print(MENU)
         choice = input("> ").upper()
 
+    # Quit message
     print(f"Thank you for using custom-built project management software.")
 
 
@@ -60,9 +62,7 @@ def load_projects():
     # Error check if invalid file
     is_valid_file = False
     while not is_valid_file:
-        # TESTING
-        filename_to_load = 'projects.txt'
-        # filename_to_load = input("What is the filename?: ")
+        filename_to_load = input("What is the filename?: ")
         try:
             in_file = open(filename_to_load, 'r')
             print(f"{filename_to_load} successfully loaded!")
@@ -82,18 +82,13 @@ def load_projects():
         projects_added.append(add_project)
     # Close file after reading
     in_file.close()
-    # TESTING
-    print(projects_added)
-    print(f"")
     return projects_added
 
 
 def save_projects(projects_added):
     """Save projects to file function"""
     # Ask user for save file name
-    # TESTING
-    filename_to_save = 'test.txt'
-    # filename_to_save = input("Save as? (eg text.txt): ")
+    filename_to_save = input("Save as? (eg text.txt): ")
     out_file = open(filename_to_save, 'w')
     # Write Header line
     print(f"Name	Start Date	Priority	Cost Estimate	Completion Percentage", file=out_file)
@@ -104,7 +99,6 @@ def save_projects(projects_added):
     # Close file after writing
     out_file.close()
     print(f"Saved successfully to {filename_to_save}")
-    print(f"")
 
 
 def display_projects(projects_added):
@@ -120,7 +114,6 @@ def display_projects(projects_added):
     for i, project in enumerate(projects_added, 0):
         if project.is_completed():
             print(f"{projects_added[i]}")
-    print(f"")
 
 
 def filter_projects(projects_added):
@@ -135,7 +128,6 @@ def filter_projects(projects_added):
     for i, project in enumerate(projects_added, 0):
         if project.start_date >= date_to_check:
             print(f"{projects_added[i]}")
-    print(f"")
 
 
 def new_project(projects_added):
@@ -151,7 +143,6 @@ def new_project(projects_added):
     add_project = Project(name, start_date, priority, cost_estimate, percent_completed)
     # Add the project we've just constructed to the list
     projects_added.append(add_project)
-    print(f"")
 
 
 def update_project(projects_added):
@@ -188,12 +179,8 @@ def update_project(projects_added):
                 if new_priority != "":
                     projects_added[user_choice].update_priority(new_priority)
 
-                # TESTING
-                print(f"{projects_added[user_choice]}")
-
         except ValueError:
             print("Not a number, try again: ")
-    print(f"")
 
 
 main()
