@@ -8,7 +8,7 @@ BoxLayout:
             font_size: 48
             multiline: False
             # This event is when the user enters text (and presses Enter)
-            on_text_validate: app.handle_calculate(input_number.text)
+            on_text: app.handle_calculate(input_number.text)
             size_hint_x: 0.8
         BoxLayout:
             orientation: 'vertical'
