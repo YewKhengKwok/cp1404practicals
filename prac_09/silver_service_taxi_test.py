@@ -2,6 +2,7 @@
 CP1404/CP5632 Practical
 SilverServiceTaxi client file
 """
+
 from prac_09.silver_service_taxi import SilverServiceTaxi
 
 FancyTaxi1 = SilverServiceTaxi("Hummer", 200, 2)

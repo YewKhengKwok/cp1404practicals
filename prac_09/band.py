@@ -1,18 +1,20 @@
 """
 CP1404/CP5632 Practical
 Band class
+"Band has Musicians" in much the same way that "Musician has Guitars" (association)
 """
-from musician import Musician
-from guitar import Guitar
 
 
 class Band:
+    """Band class"""
 
     def __init__(self, name):
+        """Band class constructor"""
         self.band_name = name
         self.band_members = []
 
     def __str__(self):
+        """Return a string representation of members and their info."""
         members_info = []
         for member in self.band_members:
             instruments_info = ", ".join(str(instrument) for instrument in member.instruments)
@@ -22,9 +24,11 @@ class Band:
         return f"{self.band_name} ({', '.join(members_info)})"
 
     def add(self, musician):
+        """Method add musician as band members"""
         self.band_members.append(musician)
 
     def play(self):
+        """Method returns what the member is playing or needs an instrument"""
         output = []
         for member in self.band_members:
             if member.instruments:

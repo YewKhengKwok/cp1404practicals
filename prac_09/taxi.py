@@ -1,12 +1,13 @@
 """
 CP1404/CP5632 Practical
-Car class
+Taxi class inherited from car class
 """
 from prac_09.car import Car
 
 
 class Taxi(Car):
     """Specialised version of a Car that includes fare costs."""
+    # base taxi fare per km
     price_per_km = 1.23
 
     def __init__(self, name, fuel):
